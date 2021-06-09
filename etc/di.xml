@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="SoftLoft\SalesApi\Api\InvoiceManagementInterface"
+                type="SoftLoft\SalesApi\Model\Service\InvoiceService"/>
+
+    <preference for="SoftLoft\SalesApi\Api\Data\InvoiceEntityInterface"
+                type="SoftLoft\SalesApi\Model\InvoiceEntity"/>
+
+    <preference for="SoftLoft\SalesApi\Api\OrderManagementInterface"
+                type="SoftLoft\SalesApi\Model\Service\OrderService"/>
+
+    <preference for="SoftLoft\SalesApi\Api\Data\OrderEntityInterface"
+                type="SoftLoft\SalesApi\Model\OrderEntity"/>
+
+    <preference for="SoftLoft\SalesApi\Api\Data\ItemEntityInterface"
+                type="SoftLoft\SalesApi\Model\ItemEntity"/>
+
+    <type name="SoftLoft\SalesApi\Model\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="order" xsi:type="object">SoftLoft\SalesApi\Model\Validators\OrderValidator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="SoftLoft\SalesApi\Model\Modification">
+        <arguments>
+            <argument name="modifications" xsi:type="array">
+                <item name="orderIncrementId" xsi:type="object">SoftLoft\SalesApi\Model\Modifications\OrderIncrementIdModification</item>
+                <item name="orderPaymentDescription" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderPaymentDescriptionModification
+                </item>
+                <item name="orderQuoteId" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderQuoteIdModification
+                </item>
+                <item name="orderItems" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderItemsModification
+                </item>
+                <item name="orderStatus" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderStatusModification
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="SoftLoft\SalesApi\Model\Modifications\OrderItemsModification">
+        <arguments>
+            <argument name="orderItemOperations" xsi:type="array">
+                <item name="removeOperation" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderItem\RemoveItemOperation
+                </item>
+                <item name="addOperation" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderItem\AddItemOperation
+                </item>
+                <item name="changePriceOperation" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderItem\ChangePriceItemOperation
+                </item>
+                <item name="changeQtyOperation" xsi:type="object">
+                    SoftLoft\SalesApi\Model\Modifications\OrderItem\ChangeQtyItemOperation
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>
